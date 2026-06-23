@@ -4,12 +4,44 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#165c59">
-<meta name="description" content="Boletim Digital da Igreja Presbiteriana Manancial — Vol. 18, 03 de Maio de 2026. Semeadores de Almas, Pr. Hélder Rodrigues.">
-<meta property="og:title" content="Boletim IPM — 03 Mai 2026 | Igreja Presbiteriana Manancial">
-<meta property="og:description" content="Semeadores de Almas — Pr. Hélder Rodrigues. Eventos, agenda, redes sociais e aniversariantes.">
-<meta property="og:type" content="website">
+
+<!-- ══ SEO BÁSICO ══ -->
+<title>Boletim Digital IPM — Vol. 18 | Semeadores de Almas | 03 Mai 2026</title>
+<meta name="description" content="Boletim semanal da Igreja Presbiteriana Manancial, Brasília-DF. Pastoral Semeadores de Almas por Pr. Hélder Rodrigues, baseado em Isaías 53. Eventos, agenda, grupos de crescimento e aniversariantes de 03 a 09 de maio de 2026.">
+<meta name="keywords" content="Igreja Presbiteriana Manancial, boletim, Brasília, DF-140, Jardim Botânico, Pr. Hélder Rodrigues, culto, EBD, grupos de crescimento, pregação reformada, Isaías 53">
+<meta name="author" content="Igreja Presbiteriana Manancial">
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href="https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/">
+
+<!-- ══ GOOGLE NEWS ══ -->
+<meta name="news_keywords" content="Igreja Presbiteriana, boletim, Brasília, pregação, Isaías 53, Semeadores de Almas">
+<meta name="publication_date" content="2026-05-03T08:00:00-03:00">
+<meta name="last_modified" content="2026-05-03T08:00:00-03:00">
+<meta name="syndication-source" content="https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/">
+<meta name="original-source" content="https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/">
+
+<!-- ══ OPEN GRAPH (WhatsApp, Facebook) ══ -->
+<meta property="og:type" content="article">
+<meta property="og:title" content="Semeadores de Almas — Boletim IPM Vol. 18 | 03 Mai 2026">
+<meta property="og:description" content="Pastoral por Pr. Hélder Rodrigues baseada em Isaías 53. Eventos, agenda semanal e aniversariantes da Igreja Presbiteriana Manancial.">
 <meta property="og:image" content="https://igrejamanancialdf.com.br/og-image.jpg">
-<title>Boletim Digital — IPM | 03 Mai 2026</title>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/">
+<meta property="og:site_name" content="Igreja Presbiteriana Manancial">
+<meta property="og:locale" content="pt_BR">
+<meta property="article:published_time" content="2026-05-03T08:00:00-03:00">
+<meta property="article:author" content="Pr. Hélder Rodrigues">
+<meta property="article:section" content="Boletim">
+<meta property="article:tag" content="Pregação">
+<meta property="article:tag" content="Isaías 53">
+<meta property="article:tag" content="Igreja Presbiteriana">
+
+<!-- ══ TWITTER CARD ══ -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Semeadores de Almas — Boletim IPM | 03 Mai 2026">
+<meta name="twitter:description" content="Pastoral por Pr. Hélder Rodrigues baseada em Isaías 53.">
+<meta name="twitter:image" content="https://igrejamanancialdf.com.br/og-image.jpg">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%231a4d3e'/><text y='70' x='50' text-anchor='middle' font-size='58' font-family='Georgia,serif' fill='%232a9d8f'>M</text></svg>">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Merriweather:ital,wght@0,400;0,700;1,400&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -1026,6 +1058,58 @@ footer::before {
 }
 footer strong { display: block; font-family: 'Merriweather', serif; font-size: 17px; margin-bottom: 4px; }
 footer a { color: var(--teal); text-decoration: none; }
+.footer-redes {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+.footer-redes a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: rgba(255,255,255,.1);
+  color: rgba(255,255,255,.75);
+  transition: background .15s, color .15s;
+  border: 1px solid rgba(255,255,255,.12);
+}
+.footer-redes a:hover { background: var(--teal); color: var(--branco); }
+.footer-endereco {
+  display: block;
+  font-style: normal;
+  margin: 16px 0;
+  padding: 14px 18px;
+  background: rgba(255,255,255,.06);
+  border-radius: var(--r);
+  border: 1px solid rgba(255,255,255,.08);
+  line-height: 1.8;
+  font-size: 13.5px;
+  color: rgba(255,255,255,.7);
+}
+.footer-endereco-nome {
+  display: block;
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--branco);
+  margin-bottom: 4px;
+}
+.footer-endereco-link {
+  color: rgba(255,255,255,.65);
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 1.7;
+}
+.footer-endereco-link:hover { color: var(--teal); }
+.footer-breadcrumb {
+  display: block;
+  margin-top: 16px;
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+}
+.footer-breadcrumb a { color: rgba(255,255,255,.4); text-decoration: none; }
+.footer-breadcrumb a:hover { color: var(--teal); }
 .footer-slogan {
   display: inline-block;
   margin-top: 14px;
@@ -1062,6 +1146,120 @@ section { animation: fadeUp .5s ease both; }
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
 </style>
+
+<!-- ══ SCHEMA.ORG — DADOS ESTRUTURADOS ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "NewsArticle",
+      "headline": "Semeadores de Almas — Boletim Digital IPM Vol. 18",
+      "description": "Pastoral por Pr. Hélder Rodrigues baseada em Isaías 53. Eventos, agenda semanal e aniversariantes da Igreja Presbiteriana Manancial de 03 a 09 de maio de 2026.",
+      "image": "https://igrejamanancialdf.com.br/og-image.jpg",
+      "datePublished": "2026-05-03T08:00:00-03:00",
+      "dateModified": "2026-05-03T08:00:00-03:00",
+      "author": {
+        "@type": "Person",
+        "name": "Pr. Hélder Rodrigues",
+        "url": "https://igrejamanancialdf.com.br"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "name": "Igreja Presbiteriana Manancial",
+        "url": "https://igrejamanancialdf.com.br",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://igrejamanancialdf.com.br/og-image.jpg",
+          "width": 600,
+          "height": 600
+        }
+      },
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/"
+      },
+      "articleSection": "Boletim",
+      "keywords": "Igreja Presbiteriana Manancial, Isaías 53, pregação reformada, Brasília, boletim",
+      "inLanguage": "pt-BR"
+    },
+    {
+      "@type": "Church",
+      "@id": "https://igrejamanancialdf.com.br/#church",
+      "name": "Igreja Presbiteriana Manancial",
+      "alternateName": "IPM Brasília",
+      "url": "https://igrejamanancialdf.com.br",
+      "telephone": "+55-61-99977-4460",
+      "email": "contato@ipmanancial.org.br",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Rodovia DF-140, Km 4,5 — Chácara Manancial",
+        "addressLocality": "Jardim Botânico (Tororó)",
+        "addressRegion": "DF",
+        "postalCode": "71686-650",
+        "addressCountry": "BR"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": -15.9226,
+        "longitude": -47.8799
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "10:00",
+          "closes": "11:30",
+          "description": "Escola Bíblica Dominical"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Sunday",
+          "opens": "19:00",
+          "closes": "20:30",
+          "description": "Culto de Celebração"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Tuesday",
+          "opens": "20:00",
+          "closes": "21:30",
+          "description": "Terça da Vitória"
+        }
+      ],
+      "sameAs": [
+        "https://www.youtube.com/channel/UCM459tPd0vGrdd2W5OwfIPw",
+        "https://www.instagram.com/ip.manancial",
+        "https://www.facebook.com/ipmanancialdf",
+        "https://igrejamanancialdf.com.br"
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Igreja Presbiteriana Manancial",
+          "item": "https://igrejamanancialdf.com.br"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "Boletins",
+          "item": "https://igrejamanancialdf.com.br/boletim/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 3,
+          "name": "Vol. 18 — 03 Mai 2026",
+          "item": "https://igrejamanancialdf.com.br/boletim/vol18-maio-2026/"
+        }
+      ]
+    }
+  ]
+}
+</script>
 </head>
 <body>
 
@@ -1705,10 +1903,45 @@ section { animation: fadeUp .5s ease both; }
   <a href="tel:5561999774460">(61) 99977-4460</a><br>
   <a href="mailto:contato@ipmanancial.org.br">contato@ipmanancial.org.br</a>
   <br><br>
-  <a href="https://www.youtube.com/channel/UCM459tPd0vGrdd2W5OwfIPw" target="_blank" rel="noopener" style="margin:0 6px;">▶ YouTube</a>
-  <a href="https://www.instagram.com/ip.manancial" target="_blank" rel="noopener" style="margin:0 6px;">📸 Instagram</a>
-  <a href="https://www.facebook.com/ipmanancialdf" target="_blank" rel="noopener" style="margin:0 6px;">👥 Facebook</a>
+  <!-- Redes sociais -->
+  <div class="footer-redes">
+    <a href="https://www.youtube.com/channel/UCM459tPd0vGrdd2W5OwfIPw" target="_blank" rel="noopener" aria-label="YouTube">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.2 5 12 5 12 5s-4.2 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.8 19 12 19 12 19s4.2 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
+    </a>
+    <a href="https://www.instagram.com/ip.manancial" target="_blank" rel="noopener" aria-label="Instagram">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+    </a>
+    <a href="https://www.facebook.com/ipmanancialdf" target="_blank" rel="noopener" aria-label="Facebook">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+    </a>
+    <a href="https://www.tiktok.com/@ipmanancial" target="_blank" rel="noopener" aria-label="TikTok">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
+    </a>
+    <a href="https://wa.me/5561999774460" target="_blank" rel="noopener" aria-label="WhatsApp">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1s-.8.9-1 1.1c-.2.2-.4.2-.7.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4C7 7.7 6 8.7 6 10.7c0 2 1.5 3.9 1.7 4.2.2.3 2.8 4.3 6.9 6 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.5-1 2.8-2 .3-.9.3-1.7.2-1.9-.1-.1-.3-.2-.6-.3z"/><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.3-1.6A12 12 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.5zM12 22c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7.9.9-3.6-.2-.4A10 10 0 0 1 2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/></svg>
+    </a>
+  </div>
+
+  <!-- Endereço (importante para SEO local e Google News) -->
+  <address class="footer-endereco">
+    <span class="footer-endereco-nome">Igreja Presbiteriana Manancial</span>
+    <a href="https://www.google.com/maps/search/Igreja+Presbiteriana+Manancial+DF+140+Brasilia"
+       target="_blank" rel="noopener" class="footer-endereco-link">
+      Rodovia DF-140, Km 4,5 — Chácara Manancial<br>
+      Jardim Botânico (Tororó) — Brasília/DF — CEP 71686-650
+    </a>
+  </address>
+
   <span class="footer-slogan">Somos embaixadores do Reino de Deus</span>
+
+  <!-- Breadcrumb visível para SEO -->
+  <nav class="footer-breadcrumb" aria-label="Localização no site">
+    <a href="https://igrejamanancialdf.com.br">igrejamanancialdf.com.br</a>
+    <span> › </span>
+    <a href="https://igrejamanancialdf.com.br/boletim/">Boletins</a>
+    <span> › </span>
+    <span>Vol. 18 — 03 Mai 2026</span>
+  </nav>
 </footer>
 
 <!-- ════════════ JAVASCRIPT ════════════ -->
