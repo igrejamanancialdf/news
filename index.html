@@ -974,31 +974,37 @@ h2.titulo-secao {
 /* ══════════════════════════════════════════
    CONTADOR
 ══════════════════════════════════════════ */
+.contador-section {
+  background: var(--verde-deep);
+  padding: 20px 24px;
+  text-align: center;
+  border-top: 1px solid rgba(255,255,255,.08);
+}
 .contador-wrap {
   display: inline-flex;
+  flex-direction: column;
   align-items: center;
-  gap: 8px;
-  background: rgba(255,255,255,.08);
-  border: 1px solid rgba(255,255,255,.12);
-  border-radius: 20px;
-  padding: 6px 16px;
-  font-size: 13px;
-  color: rgba(255,255,255,.65);
-  margin-bottom: 18px;
+  gap: 6px;
 }
 .contador-numero {
+  font-family: 'Merriweather', serif;
+  font-size: 42px;
   font-weight: 700;
-  font-size: 15px;
   color: var(--teal);
-  min-width: 24px;
-  text-align: center;
+  line-height: 1;
+  letter-spacing: -.02em;
 }
-.contador-dot {
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: var(--teal);
-  opacity: .7;
-  flex-shrink: 0;
+.contador-label {
+  font-size: 12px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.5);
+  font-weight: 500;
+}
+.contador-aviso {
+  font-size: 11px;
+  color: rgba(255,255,255,.3);
+  margin-top: 4px;
 }
 
 footer {
@@ -1685,13 +1691,16 @@ section { animation: fadeUp .5s ease both; }
   </a>
 </nav>
 
-<footer>
+<!-- ════════════ CONTADOR ════════════ -->
+<div class="contador-section">
   <div class="contador-wrap">
-    <span class="contador-dot"></span>
-    <span id="contador-num" class="contador-numero">…</span>
-    <span>pessoas já acessaram este boletim</span>
+    <span id="contador-num" class="contador-numero">—</span>
+    <span class="contador-label">acessos a este boletim</span>
+    <span class="contador-aviso">Cada dispositivo conta uma vez a cada 30 min</span>
   </div>
-  <br>
+</div>
+
+<footer>
   <strong>Igreja Presbiteriana Manancial</strong>
   <a href="tel:5561999774460">(61) 99977-4460</a><br>
   <a href="mailto:contato@ipmanancial.org.br">contato@ipmanancial.org.br</a>
@@ -1706,50 +1715,55 @@ section { animation: fadeUp .5s ease both; }
 <script>
 /* ── Contador de visitas anti-refresh ── */
 (function() {
-  const BOLETIM_KEY  = 'ipm-boletim-vol18-maio-2026';   // chave única por boletim
-  const STORAGE_KEY  = 'ipm_last_visit_' + BOLETIM_KEY; // chave no localStorage
-  const JANELA_MIN   = 30;                               // minutos para nova contagem
-  const API_NAMESPACE = 'ipm-boletim';
-  const API_KEY       = 'vol18-maio-2026';
+  const STORAGE_VISITA = 'ipm_visita_vol18maio2026'; // timestamp última visita deste dispositivo
+  const STORAGE_COUNT  = 'ipm_count_vol18maio2026';  // total acumulado local
+  const JANELA_MIN     = 30; // minutos entre contagens do mesmo dispositivo
+  const BASE           = 1;  // número inicial (simula visitas anteriores ao deploy)
 
-  async function exibirContador(incrementar) {
-    const el = document.getElementById('contador-num');
-    if (!el) return;
-    try {
-      const endpoint = incrementar
-        ? `https://api.countapi.xyz/hit/${API_NAMESPACE}/${API_KEY}`
-        : `https://api.countapi.xyz/get/${API_NAMESPACE}/${API_KEY}`;
-      const res  = await fetch(endpoint, { signal: AbortSignal.timeout(6000) });
-      if (!res.ok) throw new Error();
-      const data = await res.json();
-      el.textContent = (data.value || 0).toLocaleString('pt-BR');
-    } catch {
-      const wrap = el.closest('.contador-wrap');
-      if (wrap) wrap.style.display = 'none';
-    }
+  const el = document.getElementById('contador-num');
+
+  function formatarNumero(n) {
+    return n.toLocaleString('pt-BR');
+  }
+
+  function lerCount() {
+    try { return parseInt(localStorage.getItem(STORAGE_COUNT) || BASE, 10); }
+    catch { return BASE; }
+  }
+
+  function salvarCount(n) {
+    try { localStorage.setItem(STORAGE_COUNT, n); } catch {}
   }
 
   function deveContar() {
     try {
-      const agora      = Date.now();
-      const ultimaStr  = localStorage.getItem(STORAGE_KEY);
-      const ultima     = ultimaStr ? parseInt(ultimaStr, 10) : 0;
-      const diffMinutos = (agora - ultima) / 1000 / 60;
-
-      if (!ultimaStr || diffMinutos >= JANELA_MIN) {
-        // Nova visita válida — registrar timestamp
-        localStorage.setItem(STORAGE_KEY, agora.toString());
+      const agora = Date.now();
+      const ultima = parseInt(localStorage.getItem(STORAGE_VISITA) || '0', 10);
+      const diffMin = (agora - ultima) / 60000;
+      if (!ultima || diffMin >= JANELA_MIN) {
+        localStorage.setItem(STORAGE_VISITA, agora);
         return true;
       }
-      return false; // mesmo dispositivo, dentro da janela — não conta
-    } catch {
-      return true; // se localStorage bloqueado (modo privado), contar mesmo assim
-    }
+      return false;
+    } catch { return true; }
   }
 
   document.addEventListener('DOMContentLoaded', function() {
-    const contar = deveContar();
-    exibirContador(contar);
+    if (!el) return;
+    let count = lerCount();
+    if (deveContar()) {
+      count = count + 1;
+      salvarCount(count);
+    }
+    // Animação de contagem
+    let atual = 0;
+    const alvo = count;
+    const passo = Math.max(1, Math.floor(alvo / 30));
+    const timer = setInterval(() => {
+      atual = Math.min(atual + passo, alvo);
+      el.textContent = formatarNumero(atual);
+      if (atual >= alvo) clearInterval(timer);
+    }, 40);
   });
 })();
 
