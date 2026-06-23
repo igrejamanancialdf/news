@@ -2149,6 +2149,203 @@ function compartilharBoletim() {
 }
 
 /* ── Compartilhar versículo ── */
+/* ── YouTube: grid de miniaturas com múltiplos fallbacks ── */
+const YT_CHANNEL = 'UCM459tPd0vGrdd2W5OwfIPw';
+const RSS_URL    = `https://www.youtube.com/feeds/videos.xml?channel_id=${YT_CHANNEL}`;
+
+const PROXIES = [
+  url => `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(url)}&count=5`,
+  url => `https://api.allorigins.win/get?url=${encodeURIComponent(url)}`,
+  url => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+];
+
+function formatarData(dateStr) {
+  if (!dateStr) return '';
+  try {
+    return new Date(dateStr).toLocaleDateString('pt-BR', { day: '2-digit', month: 'short', year: 'numeric' });
+  } catch { return ''; }
+}
+
+function extrairVideoId(url) {
+  const m = (url || '').match(/[?&]v=([^&]+)/);
+  return m ? m[1] : null;
+}
+
+function parsearRSS2JSON(data) {
+  // Formato rss2json
+  if (data.status === 'ok' && data.items?.length) {
+    return data.items.map(item => ({
+      id:     extrairVideoId(item.link),
+      titulo: item.title,
+      data:   item.pubDate,
+      thumb:  item.thumbnail,
+      url:    item.link,
+    }));
+  }
+  return null;
+}
+
+function parsearXML(xmlStr) {
+  // Formato XML bruto (allorigins / corsproxy)
+  try {
+    const parser = new DOMParser();
+    const doc    = parser.parseFromString(xmlStr, 'text/xml');
+    const entries = Array.from(doc.querySelectorAll('entry'));
+    if (!entries.length) return null;
+    return entries.slice(0, 5).map(entry => {
+      const videoId = entry.querySelector('videoId')?.textContent
+        || extrairVideoId(entry.querySelector('link')?.getAttribute('href'));
+      return {
+        id:     videoId,
+        titulo: entry.querySelector('title')?.textContent || '',
+        data:   entry.querySelector('published')?.textContent || '',
+        thumb:  videoId ? `https://img.youtube.com/vi/${videoId}/hqdefault.jpg` : '',
+        url:    entry.querySelector('link')?.getAttribute('href') || '',
+      };
+    });
+  } catch { return null; }
+}
+
+function criarCard(video, destaque) {
+  const thumb = video.thumb || (video.id ? `https://img.youtube.com/vi/${video.id}/hqdefault.jpg` : '');
+  const card  = document.createElement('a');
+  card.href   = video.url || `https://www.youtube.com/watch?v=${video.id}`;
+  card.target = '_blank';
+  card.rel    = 'noopener';
+  card.className = destaque ? 'yt-card destaque' : 'yt-card';
+  card.innerHTML = `
+    <div class="yt-card-thumb">
+      <img src="${thumb}" alt="${video.titulo}" loading="lazy"
+           onerror="this.src='https://img.youtube.com/vi/${video.id}/mqdefault.jpg'">
+      <div class="yt-card-play">
+        <div class="yt-card-play-btn">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+      </div>
+    </div>
+    <div class="yt-card-info">
+      <div class="yt-card-titulo">${video.titulo}</div>
+      <div class="yt-card-data">${formatarData(video.data)}</div>
+    </div>`;
+  return card;
+}
+
+async function tentarProxy(proxyFn) {
+  const res  = await fetch(proxyFn(RSS_URL), { signal: AbortSignal.timeout(7000) });
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const text = await res.text();
+  
+  // Tentar JSON primeiro (rss2json)
+  try {
+    const json = JSON.parse(text);
+    const videos = parsearRSS2JSON(json);
+    if (videos?.length) return videos;
+    // allorigins encapsula em .contents
+    if (json.contents) {
+      const v2 = parsearXML(json.contents);
+      if (v2?.length) return v2;
+    }
+  } catch {}
+  
+  // Tentar XML (corsproxy)
+  const videos = parsearXML(text);
+  if (videos?.length) return videos;
+  
+  throw new Error('Sem dados');
+}
+
+async function carregarVideos() {
+  const grid    = document.getElementById('yt-grid');
+  const loading = document.getElementById('yt-loading');
+  const erro    = document.getElementById('yt-erro');
+
+  let videos = null;
+
+  for (const proxyFn of PROXIES) {
+    try {
+      videos = await tentarProxy(proxyFn);
+      if (videos) break;
+    } catch(e) {
+      continue; // tentar próximo proxy
+    }
+  }
+
+  loading.style.display = 'none';
+
+  if (!videos?.length) {
+    erro.style.display = 'block';
+    return;
+  }
+
+  videos.forEach((v, i) => grid.appendChild(criarCard(v, i === 0)));
+  grid.style.display = 'grid';
+}
+
+document.addEventListener('DOMContentLoaded', carregarVideos);
+
+/* ── Avaliação Google ── */
+function abrirAvaliacaoGoogle(e) {
+  // Tenta o link direto de review; se falhar abre a busca no Maps
+  // O link writereview funciona quando o Place ID está correto
+  // Fallback: busca pelo nome no Google Maps
+  const fallback = 'https://www.google.com/maps/search/Igreja+Presbiteriana+Manancial+DF+140+Brasilia';
+  // Deixa o href padrão funcionar; se der 404, abre o fallback
+  setTimeout(() => {
+    // Não faz nada — o link padrão já funcionou
+  }, 100);
+}
+
+/* ── Copiar chave PIX ── */
+function copiar(idElemento, botao) {
+  const texto = document.getElementById(idElemento).textContent.trim();
+  const label = botao.querySelector('.copiar-label');
+  const icon  = botao.querySelector('.copiar-icon');
+
+  const sucesso = () => {
+    label.textContent = 'Copiado!';
+    icon.textContent  = '✅';
+    setTimeout(() => { label.textContent = 'Copiar'; icon.textContent = '📋'; }, 2400);
+  };
+
+  if (navigator.clipboard && window.isSecureContext) {
+    navigator.clipboard.writeText(texto).then(sucesso).catch(() => copiarFallback(idElemento, sucesso));
+  } else {
+    copiarFallback(idElemento, sucesso);
+  }
+}
+
+function copiarFallback(id, cb) {
+  const el = document.getElementById(id);
+  const sel = window.getSelection();
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  sel.removeAllRanges();
+  sel.addRange(range);
+  try { document.execCommand('copy'); cb(); } catch(e) {}
+  sel.removeAllRanges();
+}
+
+/* ── Compartilhar boletim ── */
+function compartilharBoletim() {
+  const dados = {
+    title: 'Boletim IPM — 03 de Maio de 2026',
+    text: 'Confira o Boletim Digital da Igreja Presbiteriana Manancial! Pastoral, eventos, agenda e muito mais.',
+    url: window.location.href
+  };
+  if (navigator.share) {
+    navigator.share(dados).catch(() => {});
+  } else {
+    /* fallback: copia a URL */
+    const url = window.location.href;
+    if (navigator.clipboard) {
+      navigator.clipboard.writeText(url).then(() => alert('Link copiado! Cole no WhatsApp ou onde quiser.'));
+    } else {
+      prompt('Copie e compartilhe este link:', url);
+    }
+  }
+}
+
+/* ── Compartilhar versículo ── */
 /* ── YouTube: grid de miniaturas ── */
 const YT_CHANNEL = 'UCM459tPd0vGrdd2W5OwfIPw';
 
