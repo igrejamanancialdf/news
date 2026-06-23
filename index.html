@@ -40,11 +40,16 @@ body {
 
 /* Limitar largura do conteúdo principal em desktop */
 .header-inner,
-.main,
-footer > * {
+.main {
   max-width: 860px;
   margin-left: auto;
   margin-right: auto;
+}
+
+footer .footer-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  text-align: center;
 }
 
 /* ── HEADER ── */
@@ -396,6 +401,7 @@ footer a { color: var(--teal); text-decoration: none; }
 
 <!-- FOOTER -->
 <footer>
+  <div class="footer-inner">
   <strong>Igreja Presbiteriana Manancial</strong>
   <a href="tel:5561999774460">(61) 99977-4460</a> ·
   <a href="mailto:contato@ipmanancial.org.br">contato@ipmanancial.org.br</a>
@@ -417,6 +423,7 @@ footer a { color: var(--teal); text-decoration: none; }
     </a>
   </div>
   <span class="footer-slogan">Somos embaixadores do Reino de Deus</span>
+  </div>
 </footer>
 
 </body>
