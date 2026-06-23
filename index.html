@@ -33,9 +33,18 @@
 html { font-size: 17px; }
 body {
   font-family: 'Inter', sans-serif;
-  background: var(--cinza-bg);
+  background: #c8d8d6;
   color: var(--texto);
   line-height: 1.6;
+}
+
+/* Limitar largura do conteúdo principal em desktop */
+.header-inner,
+.main,
+footer > * {
+  max-width: 860px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* ── HEADER ── */
@@ -365,6 +374,14 @@ footer a { color: var(--teal); text-decoration: none; }
 
   <div class="grid-anteriores">
 
+    <a class="card-anterior" href="vol23-junho-2026/index.html">
+      <span class="ca-vol">Vol. 23 · 07 Jun 2026</span>
+      <h3>Do Esconderijo aos Braços do Pai</h3>
+      <span class="ca-data">📅 07 de Junho de 2026</span>
+      <span class="ca-pastor">Pr. Hélder Rodrigues — Gênesis 3</span>
+      <span class="ca-seta">Ler edição →</span>
+    </a>
+
     <a class="card-anterior" href="vol18-maio-2026/index.html">
       <span class="ca-vol">Vol. 18 · 03 Mai 2026</span>
       <h3>Semeadores de Almas</h3>
@@ -372,8 +389,6 @@ footer a { color: var(--teal); text-decoration: none; }
       <span class="ca-pastor">Pr. Hélder Rodrigues — Isaías 53</span>
       <span class="ca-seta">Ler edição →</span>
     </a>
-
-    <!-- Próximas edições serão adicionadas aqui -->
 
   </div>
 
