@@ -920,6 +920,33 @@ h2.titulo-secao {
 /* ══════════════════════════════════════════
    FOOTER
 ══════════════════════════════════════════ */
+.contador-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 20px;
+  padding: 6px 16px;
+  font-size: 13px;
+  color: rgba(255,255,255,.65);
+  margin-bottom: 18px;
+}
+.contador-numero {
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--teal);
+  min-width: 24px;
+  text-align: center;
+}
+.contador-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal);
+  opacity: .7;
+  flex-shrink: 0;
+}
+
 footer {
   background: var(--verde-deep);
   color: var(--branco);
@@ -1584,6 +1611,12 @@ section { animation: fadeUp .5s ease both; }
 
 <!-- ════════════ FOOTER ════════════ -->
 <footer>
+  <div class="contador-wrap">
+    <span class="contador-dot"></span>
+    <span id="contador-num" class="contador-numero">…</span>
+    <span>pessoas já acessaram este boletim</span>
+  </div>
+  <br>
   <strong>Igreja Presbiteriana Manancial</strong>
   <a href="tel:5561999774460">(61) 99977-4460</a><br>
   <a href="mailto:contato@ipmanancial.org.br">contato@ipmanancial.org.br</a>
@@ -1596,6 +1629,28 @@ section { animation: fadeUp .5s ease both; }
 
 <!-- ════════════ JAVASCRIPT ════════════ -->
 <script>
+/* ── Contador de visitas ── */
+async function contarVisita() {
+  const namespace = 'ipm-boletim';
+  const key       = 'vol18-maio-2026';
+  const el        = document.getElementById('contador-num');
+  try {
+    // Incrementa e retorna o novo valor
+    const res  = await fetch(
+      `https://api.countapi.xyz/hit/${namespace}/${key}`,
+      { signal: AbortSignal.timeout(5000) }
+    );
+    if (!res.ok) throw new Error();
+    const data = await res.json();
+    if (el) el.textContent = data.value.toLocaleString('pt-BR');
+  } catch {
+    // Fallback silencioso — remove o contador se offline
+    const wrap = el?.closest('.contador-wrap');
+    if (wrap) wrap.style.display = 'none';
+  }
+}
+document.addEventListener('DOMContentLoaded', contarVisita);
+
 /* ── Avaliação Google ── */
 function abrirAvaliacaoGoogle(e) {
   // Tenta o link direto de review; se falhar abre a busca no Maps
