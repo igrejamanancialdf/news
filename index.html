@@ -345,12 +345,62 @@ h2.titulo-secao {
 .rede-info { display: flex; flex-direction: column; }
 .rede-nome { font-size: 14px; font-weight: 700; line-height: 1.2; }
 .rede-handle { font-size: 11px; font-weight: 400; opacity: .8; }
-.rede-yt  { background: linear-gradient(135deg,#c4302b,#8b1a1a); }
-.rede-ig  { background: linear-gradient(135deg,#833ab4,#e1306c,#f77737); }
-.rede-fb  { background: linear-gradient(135deg,#1877f2,#0a50b5); }
+.rede-yt     { background: linear-gradient(135deg,#c4302b,#8b1a1a); }
+.rede-ig     { background: linear-gradient(135deg,#833ab4,#e1306c,#f77737); }
+.rede-fb     { background: linear-gradient(135deg,#1877f2,#0a50b5); }
 .rede-tiktok { background: linear-gradient(135deg,#010101,#333); }
-.rede-wpp { background: linear-gradient(135deg,#25d366,#128c3e); }
-.rede-full { grid-column: 1 / -1; }
+.rede-wpp    { background: linear-gradient(135deg,#25d366,#128c3e); }
+.rede-full   { grid-column: 1 / -1; }
+
+/* YouTube destaque — ocupa linha inteira, layout horizontal e maior */
+.rede-yt-destaque {
+  grid-column: 1 / -1;
+  background: linear-gradient(135deg, #c4302b 0%, #8b1a1a 100%);
+  border-radius: var(--r);
+  padding: 18px 20px;
+  text-decoration: none;
+  color: var(--branco);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  box-shadow: 0 4px 20px rgba(196,48,43,.35);
+  transition: filter .15s, transform .15s;
+  margin-top: 4px;
+}
+.rede-yt-destaque:hover { filter: brightness(1.1); transform: translateY(-2px); }
+.rede-yt-destaque:active { transform: translateY(0); }
+.rede-yt-destaque .yt-icon-grande {
+  width: 52px; height: 52px;
+  border-radius: 12px;
+  background: rgba(255,255,255,.18);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.rede-yt-destaque .yt-cta-info { flex: 1; }
+.rede-yt-destaque .yt-cta-label {
+  font-size: 10px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  opacity: .75;
+  font-weight: 600;
+  margin-bottom: 3px;
+}
+.rede-yt-destaque .yt-cta-titulo {
+  font-family: 'Merriweather', serif;
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.3;
+  margin-bottom: 3px;
+}
+.rede-yt-destaque .yt-cta-sub {
+  font-size: 13px;
+  opacity: .75;
+}
+.rede-yt-destaque .yt-seta {
+  font-size: 22px;
+  opacity: .8;
+  flex-shrink: 0;
+}
 
 .redes-cta {
   background: var(--teal-lt);
@@ -1345,16 +1395,8 @@ section { animation: fadeUp .5s ease both; }
   <p class="redes-intro">Nos acompanhe nas redes e fique por dentro de tudo que acontece na IPM. Compartilhe com amigos e família — cada seguidor é uma semente!</p>
 
   <div class="redes-grid">
-    <a class="rede-btn rede-yt" href="https://www.youtube.com/channel/UCM459tPd0vGrdd2W5OwfIPw" target="_blank" rel="noopener" aria-label="YouTube IPM">
-      <div class="rede-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.2 5 12 5 12 5s-4.2 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.8 19 12 19 12 19s4.2 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
-      </div>
-      <div class="rede-info">
-        <span class="rede-nome">YouTube</span>
-        <span class="rede-handle">@ipmanancial</span>
-      </div>
-    </a>
 
+    <!-- Instagram (1º) -->
     <a class="rede-btn rede-ig" href="https://www.instagram.com/ip.manancial" target="_blank" rel="noopener" aria-label="Instagram IPM">
       <div class="rede-icon-box">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="white" stroke="none"/></svg>
@@ -1365,6 +1407,18 @@ section { animation: fadeUp .5s ease both; }
       </div>
     </a>
 
+    <!-- WhatsApp (2º) -->
+    <a class="rede-btn rede-wpp" href="https://wa.me/5561999774460?text=Ol%C3%A1%2C+vim+pelo+boletim+digital+e+gostaria+de+mais+informa%C3%A7%C3%B5es!" target="_blank" rel="noopener" aria-label="WhatsApp IPM">
+      <div class="rede-icon-box">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1s-.8.9-1 1.1c-.2.2-.4.2-.7.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4C7 7.7 6 8.7 6 10.7c0 2 1.5 3.9 1.7 4.2.2.3 2.8 4.3 6.9 6 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.5-1 2.8-2 .3-.9.3-1.7.2-1.9-.1-.1-.3-.2-.6-.3z"/><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.3-1.6A12 12 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.5zM12 22c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7.9.9-3.6-.2-.4A10 10 0 0 1 2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/></svg>
+      </div>
+      <div class="rede-info">
+        <span class="rede-nome">WhatsApp</span>
+        <span class="rede-handle">Fale conosco</span>
+      </div>
+    </a>
+
+    <!-- Facebook (3º) -->
     <a class="rede-btn rede-fb" href="https://www.facebook.com/ipmanancialdf" target="_blank" rel="noopener" aria-label="Facebook IPM">
       <div class="rede-icon-box">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
@@ -1375,6 +1429,7 @@ section { animation: fadeUp .5s ease both; }
       </div>
     </a>
 
+    <!-- TikTok (4º) -->
     <a class="rede-btn rede-tiktok" href="https://www.tiktok.com/@ipmanancial" target="_blank" rel="noopener" aria-label="TikTok IPM">
       <div class="rede-icon-box">
         <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-2.88 2.5 2.89 2.89 0 0 1-2.89-2.89 2.89 2.89 0 0 1 2.89-2.89c.28 0 .54.04.79.1V9.01a6.32 6.32 0 0 0-.79-.05 6.34 6.34 0 0 0-6.34 6.34 6.34 6.34 0 0 0 6.34 6.34 6.34 6.34 0 0 0 6.33-6.34V8.69a8.18 8.18 0 0 0 4.78 1.52V6.75a4.85 4.85 0 0 1-1.01-.06z"/></svg>
@@ -1385,15 +1440,19 @@ section { animation: fadeUp .5s ease both; }
       </div>
     </a>
 
-    <a class="rede-btn rede-wpp" href="https://wa.me/5561999774460?text=Ol%C3%A1%2C+vim+pelo+boletim+digital+e+gostaria+de+mais+informa%C3%A7%C3%B5es!" target="_blank" rel="noopener" aria-label="WhatsApp IPM">
-      <div class="rede-icon-box">
-        <svg width="22" height="22" viewBox="0 0 24 24" fill="white"><path d="M17.5 14.4c-.3-.1-1.7-.8-1.9-.9-.3-.1-.5-.1-.7.1s-.8.9-1 1.1c-.2.2-.4.2-.7.1-1.8-.9-3-1.6-4.2-3.6-.3-.5.3-.5.9-1.6.1-.2.1-.4 0-.5l-.9-2.1c-.2-.5-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4C7 7.7 6 8.7 6 10.7c0 2 1.5 3.9 1.7 4.2.2.3 2.8 4.3 6.9 6 2.6 1.1 3.6 1.2 4.9 1 .8-.1 2.5-1 2.8-2 .3-.9.3-1.7.2-1.9-.1-.1-.3-.2-.6-.3z"/><path d="M20.5 3.5A11.9 11.9 0 0 0 12 0C5.4 0 0 5.4 0 12c0 2.1.6 4.2 1.6 6L0 24l6.3-1.6A12 12 0 0 0 12 24c6.6 0 12-5.4 12-12 0-3.2-1.2-6.2-3.5-8.5zM12 22c-1.8 0-3.6-.5-5.1-1.4l-.4-.2-3.7.9.9-3.6-.2-.4A10 10 0 0 1 2 12C2 6.5 6.5 2 12 2s10 4.5 10 10-4.5 10-10 10z"/></svg>
+    <!-- YouTube (5º) — largo, ocupa as duas colunas, com CTA -->
+    <a class="rede-yt-destaque" href="https://www.youtube.com/channel/UCM459tPd0vGrdd2W5OwfIPw" target="_blank" rel="noopener" aria-label="Canal YouTube IPM">
+      <div class="yt-icon-grande">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M21.8 8s-.2-1.4-.8-2c-.8-.8-1.6-.8-2-.9C16.2 5 12 5 12 5s-4.2 0-7 .1c-.4.1-1.2.1-2 .9-.6.6-.8 2-.8 2S2 9.6 2 11.2v1.5c0 1.6.2 3.2.2 3.2s.2 1.4.8 2c.8.8 1.8.8 2.3.9C6.8 19 12 19 12 19s4.2 0 7-.2c.4-.1 1.2-.1 2-.9.6-.6.8-2 .8-2s.2-1.6.2-3.2v-1.5C22 9.6 21.8 8 21.8 8zM9.7 14.5V9l5.4 2.8-5.4 2.7z"/></svg>
       </div>
-      <div class="rede-info">
-        <span class="rede-nome">WhatsApp</span>
-        <span class="rede-handle">Fale conosco</span>
+      <div class="yt-cta-info">
+        <div class="yt-cta-label">Canal oficial</div>
+        <div class="yt-cta-titulo">Assista aos cultos e pregações</div>
+        <div class="yt-cta-sub">Se inscreva e ative o sininho 🔔</div>
       </div>
+      <div class="yt-seta">▶</div>
     </a>
+
   </div>
 
   <div class="redes-cta">
